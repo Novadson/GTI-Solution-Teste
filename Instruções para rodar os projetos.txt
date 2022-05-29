@@ -1,0 +1,215 @@
+1 : Os Site MVC e Projeto API foram desenvolvidos usando o Visual Studio 2022,sugiro que usando mesmo para rodar os projetos.
+
+2: Não é necessário rodar os SCRIPTS de banco de dados,pois usei MIGRATION para criar as tabelas de forma automatizado,mas caso queiram usar,estão no final deste arquivo.
+
+3 : Ao baixar o projeto:
+	1:Altere a ConnectionStrings no arquivo "appsettings.json",o banco de dados DEVE SER SQL SERVE,pois o projeto está configurado para usar este banco de dados.
+	2 : SELECIONE O PROJETO API e no console do VS roda os seguintes comando para gerar a MIGRATION,add-migration "nome do migration" e update-database para criar as tabelas na base de dados.
+
+4 :  Os Site MVC e Projeto API estão na mesma SOLUTION,porém devem rodar-los individualmente,pois o projeto  Site MVC usará o PROJETO API,para fazer consultas,inserir dados entre outro,
+como foi solicidado da tarefa.
+
+OBSERVAÇÃO:Só tive tempo para desenvolver esses dois projetos: Site MVC e Projeto API,porém acredito que Web form e WCF apesar de trabalhar pouco com eles,
+consigo trabalhar sem problema,mas eu trabalho mais com MVC web e API,outra questão NÃO CHEGUEI A COLOCAR NENHUM TIPO DE AUTENTICAÇÃO NA API,MAS SEI É CRUCIAL TER.
+
+---------------------------------------------------OS SCRIPTS DO BANCO DE DADOS SQL SERVER---------------------------------------------------------------------------
+
+______________________________________________________________REGION CREATE DATABASE_________________________________________________________________________________
+
+USE [master]
+GO
+
+/****** Object:  Database [GTISolutiionDBTeste]    Script Date: 2022-05-29 2:48:00 PM ******/
+CREATE DATABASE [GTISolutiionDBTeste]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'GTISolutiionDBTeste', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\GTISolutiionDBTeste.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'GTISolutiionDBTeste_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\GTISolutiionDBTeste_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [GTISolutiionDBTeste].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET RECOVERY FULL 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET DB_CHAINING OFF 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET DELAYED_DURABILITY = DISABLED 
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET QUERY_STORE = OFF
+GO
+
+ALTER DATABASE [GTISolutiionDBTeste] SET  READ_WRITE 
+GO
+CREATE DATABASE
+______________________________________________________________ENDREGION CREATE DATABASE_______________________________________________________________________
+
+
+______________________________________________________________REGION CREATE TABLE CLIENTE__________________________________________________________________________
+USE [GTISolutiionDBTeste]
+GO
+
+/****** Object:  Table [dbo].[cliente]    Script Date: 2022-05-29 2:51:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[cliente](
+	[id_cliente] [uniqueidentifier] NOT NULL,
+	[nome] [varchar](1000) NULL,
+	[cpf] [varchar](1000) NULL,
+	[rg] [varchar](25) NULL,
+	[data_expedicao] [datetime2](7) NOT NULL,
+	[data_nascimento] [datetime2](7) NOT NULL,
+	[orgao_expedicao_value] [int] NOT NULL,
+	[orgao_expedicao_desc] [nvarchar](max) NULL,
+	[sexo_value] [int] NOT NULL,
+	[sexo_desc] [nvarchar](max) NULL,
+	[estado_civil_value] [int] NOT NULL,
+	[estado_civil_desc] [nvarchar](max) NULL,
+ CONSTRAINT [PK_cliente] PRIMARY KEY CLUSTERED 
+(
+	[id_cliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[cliente] ADD  DEFAULT (newsequentialid()) FOR [id_cliente]
+GO
+___________________________________________________________________ENDREGION CREATE TABLE CLIENTE_______________________________________________________________________
+
+___________________________________________________________________DREGION CREATE TABLE ENDERECO_CLIENTE_______________________________________________________________________
+
+USE [GTISolutiionDBTeste]
+GO
+
+/****** Object:  Table [dbo].[endereco_cliente]    Script Date: 2022-05-29 2:52:35 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[endereco_cliente](
+	[id_endereco_cliente] [uniqueidentifier] NOT NULL,
+	[cep] [varchar](1000) NULL,
+	[numero] [varchar](1000) NULL,
+	[complemento] [varchar](1000) NULL,
+	[bairro] [nvarchar](1000) NULL,
+	[rua] [nvarchar](1000) NULL,
+	[cidade] [varchar](250) NULL,
+	[uf_value] [int] NOT NULL,
+	[uf_desc] [nvarchar](max) NULL,
+	[id_cliente] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_endereco_cliente] PRIMARY KEY CLUSTERED 
+(
+	[id_endereco_cliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[endereco_cliente] ADD  DEFAULT (newsequentialid()) FOR [id_endereco_cliente]
+GO
+
+ALTER TABLE [dbo].[endereco_cliente]  WITH CHECK ADD  CONSTRAINT [FK_endereco_cliente_cliente_id_cliente] FOREIGN KEY([id_cliente])
+REFERENCES [dbo].[cliente] ([id_cliente])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[endereco_cliente] CHECK CONSTRAINT [FK_endereco_cliente_cliente_id_cliente]
+GO
+
+___________________________________________________________________ENDREGION CREATE TABLE ENDERECO_CLIENTE_______________________________________________________________________
+
+
