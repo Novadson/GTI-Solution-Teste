@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o/B2sUeOlNGjNoYArBXB6A6WVB4cA3a7CFLUAgtZEd+GiU3z/i4/P6oGMilU/laSP8m7FwdRs5H1syiQQvhbpg==",
+  "dgSpecHash": "IRbn0yhBp0FMkSKmtov6aYO7tHihP3yJUxPgb3cdoH7FeG3Bv0PT/WLai4E/V/USoq56wcLTOO6IRpIJFdvkqA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\novad\\Development\\my-projects\\GTI-Solution-Teste\\GTI Solution Site MVC e Site Web Forms VS 2022\\Projeto API\\Projeto API.csproj",
+  "projectFilePath": "C:\\Users\\novad\\GTI-Solution-Teste\\GTI-Solution-Teste\\GTI Solution Site MVC e Site Web Forms VS 2022\\Projeto API\\Projeto API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\novad\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\novad\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ocgKJy6fjswhNmePbwAHyH5//8yXnWHtuUuFNh7cP+5unXs+Gt3I5Dh0HbW1bNlIb0meig2OYsNWczzKVk4PWg==",
+  "dgSpecHash": "7SwL3cs3T5WJDtz4Ny1whDDwkpPloGG230prBY7G/EDSGIMVxOZ3rRR1E+WtVeRsupjYLPDCW3BWwo2WNr3gdQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\novad\\Development\\my-projects\\GTI-Solution-Teste\\GTI Solution Site MVC e Site Web Forms VS 2022\\GTI Solution\\Site MVC.csproj",
+  "projectFilePath": "C:\\Users\\novad\\GTI-Solution-Teste\\GTI-Solution-Teste\\GTI Solution Site MVC e Site Web Forms VS 2022\\GTI Solution\\Site MVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\novad\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\novad\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
