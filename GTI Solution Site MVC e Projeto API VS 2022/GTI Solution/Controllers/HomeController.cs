@@ -20,14 +20,11 @@ namespace GTI_Solution.Controllers
         #region GLOBAL VARIABLES
         private const string ApiKey = "";
         private const string ApiUrl = "http://localhost:62681/";
-        private readonly IConfiguration _configuration;
         private List<Cliente> ClientsList { get; set; } = new();
         private Cliente Cliente { get; set; } = new Cliente();
         #endregion GLOBAL VARIABLES
-        public HomeController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        public HomeController() { }
+
         #region VIEW INDEX
         public IActionResult Index() => View();
         #endregion VIEW INDEX
@@ -40,8 +37,6 @@ namespace GTI_Solution.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOrUpdate(Cliente Cliente)
         {
-            var ApiKey = _configuration.GetValue<string>("Credential:ApiKey");
-
             Cliente = FromTo(Cliente);
             using (var client = new HttpClient())
             {
