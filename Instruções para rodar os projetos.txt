@@ -1,3 +1,5 @@
+Link do repositório GITHUB:https://github.com/Novadson/GTI-Solution-Teste
+
 1 : Os Site MVC e Projeto API foram desenvolvidos usando o Visual Studio 2022,sugiro que usando mesmo para rodar os projetos.
 
 2: Não é necessário rodar os SCRIPTS de banco de dados,pois usei MIGRATION para criar as tabelas de forma automatizado,mas caso queiram usar,estão no final deste arquivo.
