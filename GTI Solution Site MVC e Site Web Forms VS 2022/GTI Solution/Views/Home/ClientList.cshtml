@@ -1,0 +1,85 @@
+﻿@using Projeto_API.Entities
+@{
+    ViewData["Title"] = "ClientesCadastrados";
+    <!--Autor:Novadson Thelus-->
+}
+@model List<Cliente>;
+
+<div>
+    <div>
+        <p class="panelTitulo">Clientes Cadastrados</p>
+        <a style=" background:red;color:white;font-weight:bolder;margin-top:5px" asp-action="Create" class="btn   btnNovoRegistro">
+            <i class="glyphicon glyphicon-plus"></i>Adicionar
+        </a>
+        <br />
+        <br />
+        <div class="form-group input-group" style="margin-bottom:-5px;">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search colorIconEditar"></i></span>
+             <input type="text" id="myInput" onkeyup="tableSearch()" placeholder="Buscar nome ou cpf...." title="Type in a name" class="form-control">
+        </div>
+    </div>
+    <table id="myTable" class="table table-bordered display  table-condensed  table-responsive">
+        <thead style="background-color:royalblue;color:whitesmoke" class="tabelaHeaderColor">
+            <tr>
+                <td class="col-2">Cpf</td>
+                <td class="col-2">Nome</td>
+                <td class="col-1">Rg</td>
+                <td class="col-2">Data Nascimento</td>
+                <td class="col-1">Cidade</td>
+                <td class="col-1">Estado</td>
+                <td class="col-1">Estado Civil</td>
+                <td style="text-align:center" colspan="3">Ações</td>
+            </tr>
+        </thead>
+
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => cliente.Cpf)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => cliente.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => cliente.Rg)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(qtd => cliente.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => cliente.Endereco.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => cliente.Endereco.EstadoDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => cliente.EstadoCivilDesc)
+                </td>
+
+                <td>
+                    <a style="color:blue;text-align:center" title="Editar" href="@Url.Action("Edit",new { IdCliente  =cliente.IdCliente})">Editar</a>
+                </td>
+
+                <td>
+                    <a style="color:red;text-align:center" title="Remove" href="@Url.Action("Remove",new { IdCliente  =cliente.IdCliente})">Remover</a>
+                </td>
+
+            </tr>
+        }
+    </table>
+
+    <br />
+    @if (Model.Count().Equals(0))
+    {
+        <span class="msmEmptyTable">
+            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+            Nenhum registro encontrado...
+        </span>
+    }
+</div>
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

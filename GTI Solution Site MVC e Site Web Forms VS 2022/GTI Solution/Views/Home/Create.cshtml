@@ -1,0 +1,182 @@
+﻿@using Projeto_API.Entities
+@using Projeto_API.Enum
+@model Cliente
+
+@{
+    ViewData["Title"] = "Cadastro de CLiente";
+    <!--Autor:Novadson Thelus-->
+}
+
+@using (Html.BeginForm("SaveOrUpdate", "Home", FormMethod.Post))
+{
+    <style>
+        .row {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+    if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <script type="text/javascript">alert('@ViewBag.Message');</script>
+    }
+
+    <div class="panel panel-default  col-lg-8  col-md-7 col-sm-7 col-xl  col-lg-10  panelWidth">
+        <div class="panelHeaderCliente">
+            <h5 style="margin-left:25px;color:blue">Clientes </h5>
+            <div class="row">
+                @if (Model != null)
+                {
+                    <input asp-for="IdCliente" class="form-control" style="visibility:hidden" required />
+                    <input asp-for="Endereco.IdEnderecoCliente" class="form-control" style="visibility:hidden" required />
+                }
+                <div class="col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label asp-for="Cpf" class="control-label">CPF*</label>
+                        <input asp-for="Cpf" class="form-control" id="cpf" required onblur="validarCPF(this)" />
+                        <span asp-validation-for="Cpf" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xs-8">
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label">Nome*</label>
+                        <input asp-for="Nome" class="form-control" required />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label asp-for="Rg" class="control-label">Rg*</label>
+                        <input asp-for="Rg" class="form-control" required id="rg_pr" />
+                        <span asp-validation-for="Rg" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label asp-for="DataExpedicao" class="control-label">Data Expedicão*</label>
+                        <input asp-for="DataExpedicao" type="datetime-local" class="form-control datepicker" required />
+                        <span asp-validation-for="DataExpedicao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label">Orgão Expedição*</label>
+                        <select asp-for="OrgaoExpedicaoValue" required
+                            asp-items="Html.GetEnumSelectList<OrgaosExpedidores>()" class="form-control">
+                            <option>Please select one</option>
+                        </select>
+                        <span asp-validation-for="OrgaoExpedicaoValue" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label">UF Expedição*</label>
+                        <select required asp-for="Endereco.EstadoValue" asp-items="Html.GetEnumSelectList<Estados>()" class="form-control">
+                            <option selected="selected" value="">Please select</option>
+                        </select>
+                        <span asp-validation-for="Endereco.EstadoValue" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label asp-for="DataNascimento" class="control-label">Data nascimento*</label>
+                        <input asp-for="DataNascimento" type="datetime-local" class="form-control datepicker" required />
+                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label class="control-lable">Sexo*</label>
+                        <select asp-for="SexoValue" required
+                            asp-items="Html.GetEnumSelectList<Sexos>()" class="form-control">
+                            <option>Please select one</option>
+                        </select>
+                        <span asp-validation-for="SexoValue" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-xs-3">
+                    <div class="form-group">
+                        <label class="control-label">Estado Civil*</label>
+                        <select asp-for="EstadoCivilValue"
+                            asp-items="Html.GetEnumSelectList<EstadosCivis>()" class="form-control" required>
+                            <option>Please select one</option>
+                        </select>
+                        <span asp-validation-for="EstadoCivilValue" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5 style="margin-left:25px;color:blue">Endereço</h5>
+    <div class="row">
+        <div class="col-md-2 col-xs-2">
+            <div class="form-group">
+                <label asp-for="Endereco.Cep" class="control-label">CEP*</label>
+                <input asp-for="Endereco.Cep" class="form-control cep" id="cep" required />
+                <span asp-validation-for="Endereco.Cep" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-2">
+            <div class="form-group">
+                <label asp-for="Endereco.Rua" class="control-label">Rua*</label>
+                <input asp-for="Endereco.Rua" class="form-control" required id="rua" />
+                <span asp-validation-for="Endereco.Rua" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-1 col-xs-1">
+            <div class="form-group">
+                <label asp-for="Endereco.Numero" class="control-label">Número*</label>
+                <input asp-for="Endereco.Numero" class="form-control" required id="numero" />
+                <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-2">
+            <div class="form-group">
+                <label asp-for="Endereco.Complemento" class="control-label">Complemento*</label>
+                <input asp-for="Endereco.Complemento" class="form-control" required id="complemento" />
+                <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-2">
+            <div class="form-group">
+                <label asp-for="Endereco.Bairro" class="control-label">Bairro*</label>
+                <input asp-for="Endereco.Bairro" class="form-control" required id="bairro" />
+                <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-2">
+            <div class="form-group">
+                <label asp-for="Endereco.Cidade" class="control-label">Cidade*</label>
+                <input asp-for="Endereco.Cidade" class="form-control" required id="cidade" />
+                <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+            </div>
+        </div>  <div class="col-md-1 col-xs-1">
+            <div class="form-group">
+                <label asp-for="Endereco.Cidade" class="control-label">Uf*</label>
+                <input asp-for="Endereco.Cidade" class="form-control" required id="uf_adress" />
+                <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="position:center">
+        <div class="col-md-6 col-xs-6">
+            <div class="form-group float-right">
+                <button id="btnSalvar" onclick="Confirm()" type="Submit" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i>Atualizar</button>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script src="~/js/cliente.js"></script>
+    <script src="~/lib/jquery/jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
+}
+
